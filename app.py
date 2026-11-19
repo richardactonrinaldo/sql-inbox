@@ -67,6 +67,7 @@ SCHEMA = "SQLite database lakeshore_ed.db (fictional data):\n" + "\n".join(
 
 FOREIGN_KEYS = [("visits", "patient_id", "patients"), ("visits", "site_id", "sites"),
                 ("visits", "triage_level", "triage_levels")]
+LOOKUP_TABLES = ["sites", "triage_levels"]  # shown in full in the sidebar
 PRIMARY_KEYS = {"sites": "site_id", "triage_levels": "triage_level", "patients": "patient_id", "visits": "visit_id"}
 
 
@@ -168,8 +169,8 @@ TOPICS = {
     "Module A · SELECT, WHERE and ORDER BY": (
         "Retrieving and filtering rows from ONE table: SELECT (specific columns, *), WHERE with =, <>, <, >, "
         "AND, OR, IN, BETWEEN, LIKE, IS NULL / IS NOT NULL, ORDER BY (ASC/DESC), LIMIT, DISTINCT, and column "
-        "aliases with AS. No aggregates and no joins yet: if a request needs a site name, the analyst can look up "
-        "the site_id in the sites table first. Requests should return a short list (e.g. 'the 10 longest waits "
+        "aliases with AS. No aggregates and no joins yet. If a request needs a site's ID, tell the analyst they can "
+        "look it up in the sites list in the sidebar, or by running SELECT * FROM sites first. Requests should return a short list (e.g. 'the 10 longest waits "
         "at Barrie')."),
     "Module B · Aggregates and GROUP BY": (
         "Summarising ONE table: COUNT(*), COUNT(column), COUNT(DISTINCT column), SUM, AVG, MIN, MAX, ROUND, "
@@ -459,6 +460,9 @@ with st.sidebar:
         with st.expander(t):
             st.caption(desc)
             st.markdown("\n".join(f"- `{c}` {typ.lower()}" + (f": {note}" if note else "") for c, typ, note in cols))
+            if t in LOOKUP_TABLES:  # small lookup tables: show every row, so IDs are easy to find
+                full = run_query(f"SELECT * FROM {t}")
+                st.dataframe(pd.DataFrame(full["rows"], columns=full["columns"]), hide_index=True, width="stretch")
 
     st.subheader("Conversation")
     transcript = (f"Student: {st.session_state.student} (student number ending {st.session_state.student_number})\n\n"
