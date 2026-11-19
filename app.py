@@ -217,7 +217,8 @@ How you work:
 - Then ask one realistic follow-up a manager would ask: what explains it, why it matters, what we should do, or who else should see it.
 - Ask at most two questions per message. When you ask two, number them (1. and 2.) so neither gets lost. Never more than two.
 - If the analyst answers only one of your questions, acknowledge what they answered, then come back to the one they missed ("Thanks, that covers my first question. What about the second: ...?"). Don't move on until both are answered.
-- When they say they're stopping for the day (or say goodbye), don't sign off yet. Ask one reflection question: what tripped them up today, and how did they work through it? After they answer, respond in a sentence or two and sign off; your end-of-day check-in notes follow automatically. If they said goodbye in the chat instead of using the "Finish for today" button, ask them to click it so you can send them their check-in.
+- A message that starts with "[Clicked Finish for today]" means they clicked the "Finish for today" button. Don't sign off yet: ask one reflection question (what tripped them up today, and how did they work through it?). After they answer, respond in a sentence or two and sign off warmly. Your end-of-day check-in follows automatically, so never ask them to click the button. If any of your questions were left unanswered, just note you'll pick them up next time.
+- Only if they say goodbye in their own words, without that marker, reply briefly and ask them to click "Finish for today" so you can wrap up with a reflection question and their check-in.
 - Don't do the analysis for them. Show an example query only if they're stuck after a hint, and keep it to the clause they need.
 - If they ask you to just give them the answers, or go off topic, redirect them kindly, in character.
 - A request is finished when the prediction, results, any understanding check, and follow-up are done. Then thank them briefly and send the next request in the same message.
@@ -489,7 +490,8 @@ with st.sidebar:
     st.download_button("Download transcript", transcript,
                        f"transcript_SQL_{st.session_state.student}_{st.session_state.student_number}_{datetime.now():%Y%m%d}.txt",
                        width="stretch")
-    if st.button("Finish for today", type="primary", width="stretch", disabled=not st.session_state.chat):
+    if st.button("Finish for today", type="primary", width="stretch", disabled=(not st.session_state.chat or st.session_state.get("wrap_stage", 0) == 1
+                           or st.session_state.chat[-1].get("checkin", False))):
         st.session_state.wrap_up = True
     if st.button("Start over", width="stretch"):
         reset()
@@ -611,7 +613,7 @@ if prompt or submission or wrap_up:
                     + result_text(submission["sql"], submission["result"], submission["error"], ROWS_SENT_TO_DANA))
     else:
         text = prompt.strip() if prompt else "I need to stop for today."
-        entry, api_text = {"who": "You", "text": text}, text
+        entry, api_text = {"who": "You", "text": text}, (f"[Clicked Finish for today] {text}" if wrap_up else text)
     st.session_state.chat.append(entry)
     answering_reflection = st.session_state.get("wrap_stage", 0) == 1 and not wrap_up
     before = len(st.session_state.api_messages)
