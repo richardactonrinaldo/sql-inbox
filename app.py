@@ -65,6 +65,34 @@ SCHEMA = "SQLite database lakeshore_ed.db (fictional data):\n" + "\n".join(
     f"- {t} ({desc}): " + "; ".join(f"{c} {typ}" + (f" ({note})" if note else "") for c, typ, note in cols)
     for t, (desc, cols) in TABLES.items())
 
+FOREIGN_KEYS = [("visits", "patient_id", "patients"), ("visits", "site_id", "sites"),
+                ("visits", "triage_level", "triage_levels")]
+PRIMARY_KEYS = {"sites": "site_id", "triage_levels": "triage_level", "patients": "patient_id", "visits": "visit_id"}
+
+
+def key_tag(table: str, col: str, fks: set) -> str:
+    tag = "PK" if PRIMARY_KEYS[table] == col else "FK" if (table, col) in fks else ""
+    return f'<font color="#0f6e78"><b>{tag}</b></font>' if tag else " "
+
+
+def diagram_dot() -> str:
+    """Entity-relationship diagram of the database, in Graphviz DOT."""
+    fks = {(t, c) for t, c, _ in FOREIGN_KEYS}
+    nodes = []
+    for t, (_, cols) in TABLES.items():
+        rows = "".join(
+            f'<tr><td port="{c}" align="left">{"<b>" + c + "</b>" if PRIMARY_KEYS[t] == c else c}</td>'
+            f'<td align="left"><font color="#666666">{typ.lower()}</font></td>'
+            f'<td port="k_{c}" align="left">{key_tag(t, c, fks)}</td></tr>'
+            for c, typ, _ in cols)
+        nodes.append(f'{t} [label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">'
+                     f'<tr><td colspan="3" bgcolor="#0f6e78"><font color="white"><b>{t}</b></font></td></tr>{rows}</table>>];')
+    edges = [f'{t}:k_{c}:e -> {ref}:{PRIMARY_KEYS[ref]}:w [dir=both, arrowtail=crow, arrowhead=tee];'
+             for t, c, ref in FOREIGN_KEYS]
+    return ("digraph { rankdir=LR; bgcolor=transparent; node [shape=plain, fontname=Helvetica, fontsize=11]; "
+            "edge [color=\"#555555\"]; " + " ".join(nodes + edges) + " }")
+
+
 _ALLOWED = {sqlite3.SQLITE_SELECT, sqlite3.SQLITE_READ, sqlite3.SQLITE_FUNCTION}
 
 
@@ -168,7 +196,7 @@ def system_prompt(topic: str, student: str) -> str:
 
 {SCHEMA}
 
-The analyst writes and runs queries in a SQL workspace beside this chat and sends you the query with its results. Submissions arrive marked "[Submitted from the SQL workspace]" with the query and the result rows.
+The analyst can also download the database to explore it in their own tool, but they write and run their answers in a SQL workspace beside this chat and sends you the query with its results. Submissions arrive marked "[Submitted from the SQL workspace]" with the query and the result rows.
 
 This module's focus: {TOPICS[topic]}
 
@@ -421,6 +449,11 @@ with st.sidebar:
         reset(topic)
         st.rerun()
 
+    st.subheader("Database")
+    st.download_button("Download the database (.db)", DB_PATH.read_bytes(), "lakeshore_ed.db",
+                       "application/vnd.sqlite3", width="stretch")
+    st.caption("Explore it in DB Browser for SQLite if you like. Send your results to Dana from the SQL "
+               "workspace here.")
     st.subheader("Tables")
     for t, (desc, cols) in TABLES.items():
         with st.expander(t):
@@ -433,10 +466,10 @@ with st.sidebar:
                                 f"{message_text(m, rows=20)}" for m in st.session_state.chat))
     st.download_button("Download transcript", transcript,
                        f"transcript_SQL_{st.session_state.student}_{st.session_state.student_number}_{datetime.now():%Y%m%d}.txt",
-                       use_container_width=True)
-    if st.button("Finish for today", type="primary", use_container_width=True, disabled=not st.session_state.chat):
+                       width="stretch")
+    if st.button("Finish for today", type="primary", width="stretch", disabled=not st.session_state.chat):
         st.session_state.wrap_up = True
-    if st.button("Start over", use_container_width=True):
+    if st.button("Start over", width="stretch"):
         reset()
         st.rerun()
     st.caption("Click Finish for today and answer Dana's last question, then download your transcript "
@@ -455,7 +488,7 @@ def show_result(res: dict | None, error: str | None, height: int | str = "auto")
         st.error(error)
         return
     df = pd.DataFrame(res["rows"], columns=res["columns"])
-    st.dataframe(df, hide_index=True, use_container_width=True, height=height)
+    st.dataframe(df, hide_index=True, width="stretch", height=height)
     n = len(res["rows"])
     st.caption(f"{n}{'+' if res['truncated'] else ''} row{'s' if n != 1 else ''}"
                + (f" (showing the first {MAX_RESULT_ROWS})" if res["truncated"] else ""))
@@ -471,8 +504,12 @@ def queue_submission():
 
 with sql_col:
     st.markdown("##### SQL workspace")
+    with st.expander("Database diagram", expanded=len(st.session_state.chat) <= 1):
+        st.graphviz_chart(diagram_dot(), width="stretch")
+        st.caption("PK = primary key, FK = foreign key. Each visit links to one patient, one site and one "
+                   "triage level; the forked end of a line is the 'many' side. Column notes are in the sidebar.")
     sql = st.text_area("Your query", key="sql_box", height=180, label_visibility="collapsed",
-                       placeholder="SELECT visit_id, wait_time_min\nFROM visits\nWHERE site_id = 1\nORDER BY wait_time_min DESC\nLIMIT 10;")
+                       placeholder="Type your SQL here. For example, to see the sites table:  SELECT * FROM sites;")
     if st.button("Run query", type="primary"):
         try:
             st.session_state.last_run = {"sql": sql, "result": run_query(sql), "error": None}
@@ -485,7 +522,7 @@ with sql_col:
         if stale:
             st.caption("You've changed the query since it last ran. Run it again before sending it.")
         st.text_input("Note for Dana (optional)", key="sql_note",
-                      placeholder="e.g. Here are the 10 longest waits at Barrie")
+                      placeholder="e.g. Here's my query for your request")
         st.button("Send query and results to Dana", on_click=queue_submission, disabled=stale,
                   help="Dana sees your exact query and its results.")
     else:

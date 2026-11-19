@@ -4,6 +4,8 @@ Students in HIFN1009 chat with **Dana Morgan**, a pretend Manager of Decision Su
 
 Module focus options:
 
+The SQL workspace has a database diagram (open by default at the start), and students can download the .db file from the sidebar.
+
 - **Module A:** SELECT, WHERE and ORDER BY (one table)
 - **Module B:** Aggregates and GROUP BY (COUNT, AVG, SUM, MIN, MAX, HAVING)
 - **Module C:** JOINs (INNER and LEFT)
