@@ -1,0 +1,301 @@
+VisitID,VisitDate,Month,Site,Age,AgeGroup,Sex,TriageLevel,ChiefComplaint,WaitTimeMin,LengthOfStayHrs,Disposition,CostCAD
+ED0001,2025-01-01,Jan,Orillia,26,18-39,M,4,Shortness of breath,121,5.8,Discharged,778
+ED0002,2025-01-01,Jan,Midland,60,40-64,F,4,Fever,210,4.2,Discharged,549
+ED0003,2025-01-01,Jan,Orillia,30,18-39,M,4,Injury/Fracture,64,4.2,Discharged,545
+ED0004,2025-01-02,Jan,Barrie,80,65+,F,3,Chest pain,117,4.8,Discharged,743
+ED0005,2025-01-03,Jan,Collingwood,65,65+,M,3,Shortness of breath,65,6.2,Discharged,701
+ED0006,2025-01-04,Jan,Barrie,34,18-39,M,4,Injury/Fracture,134,3.1,Discharged,629
+ED0007,2025-01-05,Jan,Barrie,61,40-64,M,3,Fever,66,5.5,Discharged,857
+ED0008,2025-01-06,Jan,Orillia,14,0-17,M,3,Chest pain,69,5.7,Discharged,787
+ED0009,2025-01-06,Jan,Midland,64,40-64,M,3,Headache,49,6.7,Discharged,807
+ED0010,2025-01-07,Jan,Orillia,60,40-64,F,4,Laceration,74,4.9,Discharged,718
+ED0011,2025-01-07,Jan,Barrie,51,40-64,M,3,Fever,67,8.6,Transferred,2738
+ED0012,2025-01-08,Jan,Barrie,18,18-39,F,4,Headache,147,9.7,Admitted,3056
+ED0013,2025-01-08,Jan,Orillia,63,40-64,M,3,Abdominal pain,39,5.4,Discharged,789
+ED0014,2025-01-08,Jan,Barrie,51,40-64,F,3,Laceration,116,4.7,Discharged,722
+ED0015,2025-01-09,Jan,Midland,56,40-64,F,3,Mental health,29,4.0,Discharged,780
+ED0016,2025-01-10,Jan,Barrie,73,65+,F,3,Abdominal pain,134,5.7,Discharged,632
+ED0017,2025-01-10,Jan,Midland,27,18-39,F,2,Shortness of breath,25,17.2,Admitted,5082
+ED0018,2025-01-11,Jan,Barrie,18,18-39,M,2,Mental health,29,5.1,Discharged,737
+ED0019,2025-01-12,Jan,Barrie,54,40-64,F,1,Chest pain,4,7.0,Transferred,1910
+ED0020,2025-01-12,Jan,Barrie,67,65+,M,3,Injury/Fracture,36,6.0,Discharged,617
+ED0021,2025-01-13,Jan,Barrie,31,18-39,F,4,Abdominal pain,171,9.0,Admitted,5530
+ED0022,2025-01-14,Jan,Barrie,63,40-64,F,4,Fever,163,5.5,Discharged,661
+ED0023,2025-01-15,Jan,Barrie,50,40-64,M,5,Injury/Fracture,158,2.9,Discharged,507
+ED0024,2025-01-15,Jan,Midland,46,40-64,M,3,Mental health,96,5.5,Discharged,942
+ED0025,2025-01-17,Jan,Orillia,18,18-39,M,4,Fever,112,4.9,Discharged,748
+ED0026,2025-01-18,Jan,Collingwood,18,18-39,F,3,Mental health,103,4.4,Discharged,890
+ED0027,2025-01-19,Jan,Barrie,25,18-39,M,4,Fever,280,3.6,Discharged,816
+ED0028,2025-01-19,Jan,Collingwood,1,0-17,F,5,Chest pain,119,3.2,Discharged,604
+ED0029,2025-01-21,Jan,Collingwood,17,0-17,F,3,Injury/Fracture,61,4.4,Discharged,814
+ED0030,2025-01-22,Jan,Barrie,57,40-64,M,3,Injury/Fracture,92,14.6,Admitted,6626
+ED0031,2025-01-24,Jan,Barrie,68,65+,F,2,Shortness of breath,18,19.2,Admitted,2866
+ED0032,2025-01-25,Jan,Orillia,6,0-17,M,4,Headache,110,20.7,Admitted,6862
+ED0033,2025-01-27,Jan,Barrie,86,65+,F,4,Fever,79,6.1,Discharged,835
+ED0034,2025-01-27,Jan,Orillia,63,40-64,F,5,Injury/Fracture,107,3.3,Discharged,620
+ED0035,2025-01-27,Jan,Collingwood,27,18-39,M,3,Laceration,56,5.7,Discharged,762
+ED0036,2025-01-30,Jan,Barrie,92,65+,M,2,Shortness of breath,26,7.6,Discharged,891
+ED0037,2025-01-30,Jan,Barrie,38,18-39,M,3,Abdominal pain,68,5.5,Discharged,808
+ED0038,2025-01-31,Jan,Barrie,62,40-64,F,2,Abdominal pain,24,6.7,Discharged,780
+ED0039,2025-01-31,Jan,Orillia,13,0-17,F,4,Shortness of breath,87,5.8,Discharged,706
+ED0040,2025-01-31,Jan,Barrie,0,0-17,M,4,Laceration,143,4.3,Discharged,592
+ED0041,2025-02-01,Feb,Midland,89,65+,M,2,Injury/Fracture,16,6.3,Discharged,837
+ED0042,2025-02-02,Feb,Orillia,4,0-17,M,3,Chest pain,96,6.1,Discharged,681
+ED0043,2025-02-02,Feb,Barrie,47,40-64,M,5,Mental health,91,2.8,Discharged,510
+ED0044,2025-02-04,Feb,Barrie,39,18-39,M,3,Fever,61,2.2,LWBS,71
+ED0045,2025-02-05,Feb,Barrie,53,40-64,F,4,Fever,118,4.4,Discharged,601
+ED0046,2025-02-06,Feb,Collingwood,64,40-64,M,4,Fever,75,5.1,Discharged,576
+ED0047,2025-02-06,Feb,Midland,44,40-64,M,4,Laceration,38,3.6,Discharged,554
+ED0048,2025-02-08,Feb,Midland,59,40-64,M,4,Chest pain,108,3.7,Discharged,747
+ED0049,2025-02-10,Feb,Barrie,27,18-39,M,3,Injury/Fracture,157,5.3,Discharged,704
+ED0050,2025-02-10,Feb,Barrie,20,18-39,F,3,Injury/Fracture,40,4.6,Discharged,937
+ED0051,2025-02-11,Feb,Barrie,50,40-64,F,3,Injury/Fracture,120,6.5,Discharged,671
+ED0052,2025-02-14,Feb,Collingwood,53,40-64,F,3,Shortness of breath,57,5.2,Discharged,880
+ED0053,2025-02-14,Feb,Orillia,7,0-17,F,4,Injury/Fracture,79,3.6,Discharged,777
+ED0054,2025-02-15,Feb,Barrie,20,18-39,F,4,Shortness of breath,123,5.8,Discharged,675
+ED0055,2025-02-15,Feb,Collingwood,56,40-64,M,4,Abdominal pain,38,0.6,LWBS,68
+ED0056,2025-02-16,Feb,Barrie,62,40-64,M,4,Fever,78,5.0,Discharged,551
+ED0057,2025-02-17,Feb,Midland,38,18-39,F,5,Headache,133,2.2,LWBS,73
+ED0058,2025-02-18,Feb,Orillia,5,0-17,M,3,Mental health,67,5.4,Discharged,692
+ED0059,2025-02-19,Feb,Orillia,78,65+,F,5,Laceration,177,2.8,Discharged,720
+ED0060,2025-02-20,Feb,Midland,0,0-17,F,4,Abdominal pain,71,4.7,Discharged,525
+ED0061,2025-02-21,Feb,Midland,59,40-64,F,2,Chest pain,45,5.1,Discharged,931
+ED0062,2025-02-23,Feb,Orillia,23,18-39,M,3,Injury/Fracture,89,5.7,Discharged,760
+ED0063,2025-02-24,Feb,Barrie,41,40-64,F,3,Laceration,91,6.9,Discharged,681
+ED0064,2025-02-24,Feb,Collingwood,79,65+,M,3,Injury/Fracture,55,4.8,Discharged,757
+ED0065,2025-02-24,Feb,Orillia,12,0-17,M,3,Shortness of breath,65,5.0,Discharged,848
+ED0066,2025-02-27,Feb,Orillia,58,40-64,M,4,Mental health,52,4.2,Discharged,522
+ED0067,2025-02-27,Feb,Orillia,12,0-17,F,2,Fever,37,6.2,Discharged,1079
+ED0068,2025-02-28,Feb,Barrie,39,18-39,F,4,Mental health,132,5.0,Discharged,713
+ED0069,2025-03-01,Mar,Barrie,19,18-39,F,1,Abdominal pain,4,15.8,Admitted,6106
+ED0070,2025-03-02,Mar,Barrie,53,40-64,F,5,Fever,101,0.5,LWBS,74
+ED0071,2025-03-02,Mar,Collingwood,39,18-39,F,3,Laceration,51,6.4,Discharged,893
+ED0072,2025-03-02,Mar,Collingwood,65,65+,F,4,Fever,89,3.9,Discharged,689
+ED0073,2025-03-04,Mar,Orillia,71,65+,M,3,Fever,29,4.1,Discharged,662
+ED0074,2025-03-05,Mar,Orillia,65,65+,F,3,Mental health,60,6.6,Discharged,685
+ED0075,2025-03-09,Mar,Barrie,93,65+,F,3,Chest pain,33,4.4,Discharged,661
+ED0076,2025-03-10,Mar,Orillia,90,65+,M,4,Mental health,110,5.7,Discharged,787
+ED0077,2025-03-10,Mar,Barrie,22,18-39,F,2,Injury/Fracture,15,6.7,Discharged,813
+ED0078,2025-03-10,Mar,Midland,54,40-64,F,5,Injury/Fracture,114,1.6,LWBS,66
+ED0079,2025-03-10,Mar,Barrie,16,0-17,F,2,Laceration,28,8.1,Admitted,5807
+ED0080,2025-03-11,Mar,Barrie,41,40-64,M,4,Laceration,208,5.4,Discharged,799
+ED0081,2025-03-12,Mar,Barrie,74,65+,M,2,Shortness of breath,39,5.3,Discharged,881
+ED0082,2025-03-14,Mar,Orillia,39,18-39,F,4,Mental health,81,5.5,Discharged,709
+ED0083,2025-03-14,Mar,Midland,68,65+,M,4,Laceration,58,3.9,Discharged,733
+ED0084,2025-03-19,Mar,Orillia,90,65+,M,2,Headache,13,5.5,Discharged,966
+ED0085,2025-03-22,Mar,Orillia,77,65+,F,2,Abdominal pain,8,5.0,Discharged,964
+ED0086,2025-03-22,Mar,Orillia,12,0-17,M,5,Abdominal pain,137,3.5,Discharged,696
+ED0087,2025-03-23,Mar,Orillia,28,18-39,F,4,Injury/Fracture,69,5.9,Discharged,835
+ED0088,2025-03-23,Mar,Orillia,64,40-64,F,3,Abdominal pain,40,5.4,Discharged,830
+ED0089,2025-03-23,Mar,Midland,50,40-64,F,5,Fever,97,3.1,Discharged,706
+ED0090,2025-03-24,Mar,Barrie,49,40-64,F,3,Injury/Fracture,76,10.2,Admitted,4084
+ED0091,2025-03-27,Mar,Barrie,44,40-64,F,4,Mental health,184,21.6,Admitted,5256
+ED0092,2025-03-29,Mar,Orillia,94,65+,F,4,Injury/Fracture,102,4.6,Discharged,741
+ED0093,2025-03-30,Mar,Barrie,29,18-39,M,4,Injury/Fracture,62,4.3,Discharged,497
+ED0094,2025-03-30,Mar,Barrie,51,40-64,M,2,Chest pain,23,6.8,Discharged,967
+ED0095,2025-03-31,Mar,Orillia,13,0-17,M,4,Injury/Fracture,95,4.3,Discharged,663
+ED0096,2025-04-01,Apr,Barrie,13,0-17,F,4,Injury/Fracture,153,2.0,LWBS,92
+ED0097,2025-04-01,Apr,Collingwood,57,40-64,F,2,Abdominal pain,20,13.0,Admitted,4206
+ED0098,2025-04-02,Apr,Barrie,69,65+,M,4,Chest pain,123,4.1,Discharged,744
+ED0099,2025-04-02,Apr,Barrie,77,65+,F,5,Laceration,122,15.5,Admitted,3887
+ED0100,2025-04-03,Apr,Barrie,24,18-39,F,4,Mental health,157,5.8,Discharged,543
+ED0101,2025-04-03,Apr,Barrie,72,65+,M,5,Laceration,148,4.8,Discharged,672
+ED0102,2025-04-04,Apr,Orillia,30,18-39,M,4,Chest pain,49,2.3,LWBS,94
+ED0103,2025-04-04,Apr,Orillia,66,65+,M,4,Chest pain,38,5.9,Discharged,760
+ED0104,2025-04-06,Apr,Barrie,73,65+,F,4,Abdominal pain,188,21.0,Admitted,6440
+ED0105,2025-04-06,Apr,Barrie,80,65+,M,3,Fever,52,2.0,LWBS,98
+ED0106,2025-04-08,Apr,Barrie,30,18-39,F,3,Chest pain,102,4.6,Discharged,641
+ED0107,2025-04-10,Apr,Orillia,59,40-64,M,5,Shortness of breath,122,3.9,Discharged,631
+ED0108,2025-04-11,Apr,Collingwood,11,0-17,F,3,Abdominal pain,47,6.4,Discharged,839
+ED0109,2025-04-13,Apr,Orillia,68,65+,M,3,Mental health,93,17.3,Admitted,3238
+ED0110,2025-04-17,Apr,Barrie,37,18-39,F,3,Fever,67,5.1,Discharged,846
+ED0111,2025-04-17,Apr,Barrie,7,0-17,M,2,Chest pain,26,14.4,Admitted,2842
+ED0112,2025-04-18,Apr,Midland,90,65+,F,5,Laceration,83,2.8,Discharged,624
+ED0113,2025-04-20,Apr,Barrie,82,65+,M,3,Chest pain,70,18.9,Admitted,4453
+ED0114,2025-04-21,Apr,Barrie,38,18-39,M,2,Chest pain,15,6.1,Discharged,1061
+ED0115,2025-04-22,Apr,Barrie,50,40-64,F,3,Injury/Fracture,137,5.0,Discharged,729
+ED0116,2025-04-23,Apr,Orillia,76,65+,M,3,Abdominal pain,84,6.6,Discharged,790
+ED0117,2025-04-23,Apr,Barrie,88,65+,F,4,Chest pain,131,5.3,Discharged,597
+ED0118,2025-04-27,Apr,Barrie,14,0-17,M,2,Mental health,52,9.8,Admitted,3955
+ED0119,2025-04-29,Apr,Barrie,39,18-39,F,3,Laceration,64,4.9,Discharged,641
+ED0120,2025-04-29,Apr,Collingwood,5,0-17,F,4,Fever,72,5.2,Discharged,527
+ED0121,2025-05-02,May,Barrie,4,0-17,M,3,Chest pain,72,4.0,Discharged,639
+ED0122,2025-05-03,May,Midland,40,40-64,M,4,Injury/Fracture,83,4.2,Discharged,674
+ED0123,2025-05-05,May,Orillia,34,18-39,F,3,Mental health,61,1.3,LWBS,71
+ED0124,2025-05-09,May,Orillia,32,18-39,M,4,Laceration,85,5.5,Discharged,567
+ED0125,2025-05-13,May,Collingwood,53,40-64,F,4,Abdominal pain,77,5.7,Discharged,735
+ED0126,2025-05-13,May,Barrie,40,40-64,F,3,Laceration,50,6.0,Discharged,856
+ED0127,2025-05-14,May,Barrie,69,65+,F,3,Abdominal pain,57,6.4,Discharged,885
+ED0128,2025-05-15,May,Orillia,43,40-64,M,2,Fever,13,6.0,Transferred,2042
+ED0129,2025-05-19,May,Barrie,4,0-17,F,3,Injury/Fracture,72,5.5,Discharged,872
+ED0130,2025-05-20,May,Collingwood,28,18-39,F,4,Fever,50,5.9,Discharged,769
+ED0131,2025-05-22,May,Midland,25,18-39,M,2,Mental health,22,6.2,Discharged,869
+ED0132,2025-05-23,May,Barrie,90,65+,F,5,Shortness of breath,92,1.3,LWBS,98
+ED0133,2025-05-27,May,Orillia,58,40-64,M,3,Laceration,104,5.8,Discharged,632
+ED0134,2025-05-28,May,Barrie,13,0-17,M,3,Chest pain,45,5.4,Discharged,739
+ED0135,2025-06-01,Jun,Collingwood,79,65+,F,3,Abdominal pain,41,4.3,Discharged,950
+ED0136,2025-06-01,Jun,Collingwood,50,40-64,F,4,Injury/Fracture,68,3.5,Discharged,524
+ED0137,2025-06-02,Jun,Orillia,58,40-64,M,2,Shortness of breath,23,10.5,Admitted,6219
+ED0138,2025-06-03,Jun,Collingwood,40,40-64,M,4,Shortness of breath,33,3.8,Discharged,771
+ED0139,2025-06-03,Jun,Barrie,29,18-39,M,2,Chest pain,20,6.0,Discharged,1074
+ED0140,2025-06-05,Jun,Orillia,47,40-64,M,5,Headache,72,4.7,Discharged,398
+ED0141,2025-06-05,Jun,Barrie,20,18-39,F,4,Abdominal pain,98,3.2,Discharged,608
+ED0142,2025-06-06,Jun,Midland,78,65+,F,2,Injury/Fracture,39,7.6,Discharged,743
+ED0143,2025-06-09,Jun,Orillia,48,40-64,F,4,Mental health,54,3.6,Discharged,834
+ED0144,2025-06-10,Jun,Barrie,67,65+,M,2,Shortness of breath,21,11.4,Admitted,5452
+ED0145,2025-06-11,Jun,Barrie,78,65+,M,4,Abdominal pain,175,5.3,Discharged,772
+ED0146,2025-06-13,Jun,Collingwood,42,40-64,M,2,Shortness of breath,11,5.4,Discharged,797
+ED0147,2025-06-14,Jun,Barrie,56,40-64,M,5,Headache,142,3.5,Discharged,651
+ED0148,2025-06-14,Jun,Barrie,35,18-39,M,4,Injury/Fracture,117,2.0,LWBS,98
+ED0149,2025-06-14,Jun,Barrie,41,40-64,F,4,Fever,57,5.9,Discharged,663
+ED0150,2025-06-16,Jun,Collingwood,26,18-39,F,5,Shortness of breath,85,3.5,Discharged,574
+ED0151,2025-06-21,Jun,Barrie,66,65+,F,3,Injury/Fracture,81,9.9,Admitted,3816
+ED0152,2025-06-22,Jun,Orillia,41,40-64,M,5,Fever,117,3.4,Discharged,375
+ED0153,2025-06-22,Jun,Barrie,62,40-64,M,3,Shortness of breath,65,4.3,Discharged,934
+ED0154,2025-06-22,Jun,Midland,24,18-39,F,3,Mental health,55,4.1,Discharged,766
+ED0155,2025-06-24,Jun,Orillia,51,40-64,M,3,Abdominal pain,30,2.0,LWBS,68
+ED0156,2025-06-26,Jun,Collingwood,24,18-39,F,3,Abdominal pain,68,4.1,Discharged,814
+ED0157,2025-06-27,Jun,Barrie,1,0-17,M,4,Fever,125,5.8,Discharged,709
+ED0158,2025-06-28,Jun,Barrie,24,18-39,F,3,Headache,49,5.8,Discharged,785
+ED0159,2025-06-30,Jun,Barrie,61,40-64,F,3,Injury/Fracture,74,7.4,Transferred,2170
+ED0160,2025-07-03,Jul,Collingwood,53,40-64,F,3,Abdominal pain,45,2.1,LWBS,94
+ED0161,2025-07-03,Jul,Barrie,9,0-17,M,2,Mental health,17,15.8,Admitted,5399
+ED0162,2025-07-03,Jul,Orillia,68,65+,M,5,Chest pain,109,3.8,Discharged,516
+ED0163,2025-07-04,Jul,Midland,2,0-17,F,3,Laceration,101,5.9,Discharged,946
+ED0164,2025-07-05,Jul,Barrie,53,40-64,M,2,Abdominal pain,23,9.0,Admitted,4422
+ED0165,2025-07-05,Jul,Barrie,70,65+,M,4,Chest pain,99,5.3,Discharged,741
+ED0166,2025-07-08,Jul,Midland,9,0-17,F,3,Abdominal pain,50,5.1,Discharged,756
+ED0167,2025-07-09,Jul,Collingwood,70,65+,F,3,Shortness of breath,34,5.4,Discharged,808
+ED0168,2025-07-10,Jul,Orillia,6,0-17,M,2,Abdominal pain,18,20.5,Admitted,4087
+ED0169,2025-07-11,Jul,Midland,57,40-64,M,1,Fever,2,8.7,Transferred,2924
+ED0170,2025-07-11,Jul,Barrie,32,18-39,M,3,Laceration,57,6.3,Discharged,953
+ED0171,2025-07-14,Jul,Orillia,91,65+,F,2,Shortness of breath,19,6.3,Discharged,991
+ED0172,2025-07-22,Jul,Collingwood,33,18-39,M,4,Abdominal pain,106,4.1,Discharged,817
+ED0173,2025-07-24,Jul,Collingwood,33,18-39,F,5,Headache,111,5.1,Discharged,676
+ED0174,2025-07-25,Jul,Orillia,6,0-17,F,2,Chest pain,11,5.8,Discharged,760
+ED0175,2025-07-27,Jul,Barrie,34,18-39,M,4,Headache,88,3.7,Discharged,796
+ED0176,2025-07-27,Jul,Barrie,50,40-64,M,4,Headache,159,21.2,Admitted,4187
+ED0177,2025-07-28,Jul,Collingwood,4,0-17,M,2,Abdominal pain,15,5.3,Discharged,779
+ED0178,2025-07-29,Jul,Orillia,61,40-64,M,4,Abdominal pain,129,4.1,Discharged,747
+ED0179,2025-07-30,Jul,Barrie,78,65+,F,3,Fever,30,15.9,Admitted,6584
+ED0180,2025-07-31,Jul,Collingwood,80,65+,M,1,Injury/Fracture,4,6.8,Transferred,2145
+ED0181,2025-08-04,Aug,Barrie,92,65+,F,2,Chest pain,16,6.0,Discharged,1047
+ED0182,2025-08-04,Aug,Collingwood,65,65+,F,3,Mental health,38,4.1,Discharged,641
+ED0183,2025-08-05,Aug,Barrie,32,18-39,M,2,Injury/Fracture,13,22.7,Admitted,6471
+ED0184,2025-08-05,Aug,Midland,18,18-39,M,3,Abdominal pain,61,3.9,Discharged,724
+ED0185,2025-08-07,Aug,Collingwood,21,18-39,F,2,Fever,15,11.3,Transferred,2410
+ED0186,2025-08-10,Aug,Collingwood,28,18-39,M,2,Shortness of breath,18,5.6,Discharged,914
+ED0187,2025-08-13,Aug,Midland,41,40-64,M,3,Laceration,109,4.5,Discharged,661
+ED0188,2025-08-16,Aug,Collingwood,77,65+,M,4,Shortness of breath,62,5.1,Discharged,537
+ED0189,2025-08-16,Aug,Barrie,60,40-64,M,5,Abdominal pain,101,2.9,Discharged,547
+ED0190,2025-08-16,Aug,Midland,67,65+,M,5,Abdominal pain,91,3.5,Discharged,423
+ED0191,2025-08-17,Aug,Barrie,49,40-64,F,4,Abdominal pain,115,5.9,Transferred,2980
+ED0192,2025-08-19,Aug,Barrie,43,40-64,M,4,Abdominal pain,127,5.1,Discharged,491
+ED0193,2025-08-19,Aug,Barrie,92,65+,F,2,Shortness of breath,30,4.8,Discharged,766
+ED0194,2025-08-21,Aug,Orillia,28,18-39,F,3,Laceration,87,1.5,LWBS,70
+ED0195,2025-08-22,Aug,Barrie,60,40-64,M,2,Shortness of breath,16,6.7,Discharged,999
+ED0196,2025-08-23,Aug,Barrie,71,65+,M,4,Abdominal pain,99,1.5,LWBS,61
+ED0197,2025-08-24,Aug,Collingwood,44,40-64,M,3,Injury/Fracture,34,6.8,Discharged,882
+ED0198,2025-08-27,Aug,Midland,47,40-64,F,4,Fever,87,4.9,Discharged,758
+ED0199,2025-09-02,Sep,Orillia,61,40-64,M,4,Chest pain,70,5.7,Discharged,772
+ED0200,2025-09-06,Sep,Barrie,2,0-17,F,4,Shortness of breath,114,3.3,Discharged,822
+ED0201,2025-09-06,Sep,Barrie,17,0-17,M,3,Mental health,61,1.1,LWBS,97
+ED0202,2025-09-07,Sep,Orillia,38,18-39,M,4,Mental health,68,5.8,Discharged,637
+ED0203,2025-09-08,Sep,Orillia,94,65+,F,3,Laceration,43,6.9,Discharged,925
+ED0204,2025-09-08,Sep,Orillia,57,40-64,F,3,Fever,81,4.7,Discharged,681
+ED0205,2025-09-10,Sep,Collingwood,39,18-39,M,3,Injury/Fracture,59,6.1,Discharged,890
+ED0206,2025-09-10,Sep,Barrie,55,40-64,F,3,Injury/Fracture,91,4.3,Discharged,890
+ED0207,2025-09-13,Sep,Midland,29,18-39,M,4,Abdominal pain,116,5.1,Discharged,697
+ED0208,2025-09-14,Sep,Barrie,60,40-64,F,4,Injury/Fracture,60,4.2,Discharged,623
+ED0209,2025-09-15,Sep,Barrie,14,0-17,M,5,Injury/Fracture,121,20.1,Admitted,4980
+ED0210,2025-09-19,Sep,Orillia,14,0-17,M,3,Injury/Fracture,50,5.4,Discharged,756
+ED0211,2025-09-20,Sep,Midland,21,18-39,M,4,Laceration,73,8.7,Admitted,3806
+ED0212,2025-09-21,Sep,Barrie,7,0-17,F,4,Shortness of breath,175,5.9,Discharged,748
+ED0213,2025-09-23,Sep,Barrie,28,18-39,F,4,Injury/Fracture,124,5.9,Discharged,691
+ED0214,2025-09-25,Sep,Barrie,64,40-64,F,4,Chest pain,150,2.5,LWBS,77
+ED0215,2025-09-27,Sep,Barrie,85,65+,M,3,Shortness of breath,43,21.8,Admitted,5261
+ED0216,2025-09-30,Sep,Barrie,28,18-39,M,4,Chest pain,109,5.9,Discharged,576
+ED0217,2025-09-30,Sep,Collingwood,66,65+,M,4,Mental health,97,2.1,LWBS,80
+ED0218,2025-09-30,Sep,Barrie,47,40-64,M,4,Abdominal pain,154,5.6,Discharged,560
+ED0219,2025-10-01,Oct,Collingwood,46,40-64,F,3,Injury/Fracture,19,1.6,LWBS,70
+ED0220,2025-10-02,Oct,Orillia,85,65+,M,2,Chest pain,19,23.3,Admitted,4643
+ED0221,2025-10-05,Oct,Barrie,23,18-39,M,4,Shortness of breath,85,3.9,Discharged,701
+ED0222,2025-10-07,Oct,Collingwood,50,40-64,M,4,Fever,57,4.0,Discharged,683
+ED0223,2025-10-08,Oct,Barrie,31,18-39,M,5,Laceration,251,1.6,LWBS,76
+ED0224,2025-10-10,Oct,Barrie,60,40-64,F,3,Abdominal pain,121,5.8,Discharged,951
+ED0225,2025-10-12,Oct,Orillia,94,65+,F,4,Injury/Fracture,149,3.7,Discharged,498
+ED0226,2025-10-13,Oct,Collingwood,26,18-39,M,3,Fever,35,4.1,Discharged,869
+ED0227,2025-10-14,Oct,Barrie,18,18-39,F,3,Chest pain,40,6.9,Discharged,895
+ED0228,2025-10-14,Oct,Midland,1,0-17,M,3,Laceration,47,4.8,Discharged,732
+ED0229,2025-10-15,Oct,Barrie,91,65+,F,4,Chest pain,75,5.1,Discharged,646
+ED0230,2025-10-16,Oct,Midland,89,65+,M,3,Injury/Fracture,42,5.3,Discharged,769
+ED0231,2025-10-17,Oct,Barrie,69,65+,F,3,Fever,63,21.5,Admitted,5597
+ED0232,2025-10-18,Oct,Orillia,91,65+,F,3,Chest pain,41,4.6,Discharged,735
+ED0233,2025-10-21,Oct,Orillia,26,18-39,F,5,Abdominal pain,150,3.2,Discharged,465
+ED0234,2025-10-21,Oct,Barrie,57,40-64,F,4,Injury/Fracture,89,3.1,Discharged,682
+ED0235,2025-10-25,Oct,Orillia,33,18-39,M,3,Chest pain,73,5.8,Discharged,911
+ED0236,2025-10-25,Oct,Midland,47,40-64,F,5,Headache,78,5.0,Discharged,550
+ED0237,2025-10-26,Oct,Barrie,32,18-39,F,4,Shortness of breath,92,5.3,Discharged,543
+ED0238,2025-10-26,Oct,Barrie,33,18-39,M,4,Mental health,107,5.7,Discharged,641
+ED0239,2025-10-27,Oct,Barrie,57,40-64,M,5,Fever,127,1.5,LWBS,62
+ED0240,2025-10-27,Oct,Collingwood,59,40-64,F,5,Abdominal pain,95,4.4,Discharged,524
+ED0241,2025-10-28,Oct,Barrie,73,65+,M,3,Fever,154,5.5,Discharged,775
+ED0242,2025-10-28,Oct,Barrie,30,18-39,M,3,Injury/Fracture,123,6.5,Discharged,710
+ED0243,2025-10-28,Oct,Midland,37,18-39,F,3,Laceration,50,5.4,Discharged,907
+ED0244,2025-10-29,Oct,Barrie,2,0-17,M,1,Chest pain,4,5.6,Discharged,867
+ED0245,2025-11-01,Nov,Midland,20,18-39,M,4,Laceration,69,4.8,Discharged,703
+ED0246,2025-11-02,Nov,Collingwood,86,65+,M,2,Chest pain,19,19.6,Admitted,5807
+ED0247,2025-11-03,Nov,Midland,14,0-17,M,5,Laceration,118,4.7,Discharged,536
+ED0248,2025-11-04,Nov,Barrie,46,40-64,F,5,Abdominal pain,229,4.9,Discharged,428
+ED0249,2025-11-04,Nov,Midland,34,18-39,M,3,Mental health,79,3.9,Discharged,803
+ED0250,2025-11-06,Nov,Orillia,24,18-39,M,4,Fever,105,3.8,Discharged,831
+ED0251,2025-11-06,Nov,Barrie,6,0-17,M,4,Injury/Fracture,98,5.7,Discharged,766
+ED0252,2025-11-06,Nov,Barrie,12,0-17,M,4,Fever,115,3.2,Discharged,628
+ED0253,2025-11-07,Nov,Collingwood,56,40-64,M,5,Shortness of breath,59,4.7,Discharged,563
+ED0254,2025-11-08,Nov,Barrie,6,0-17,F,4,Mental health,79,3.4,Discharged,517
+ED0255,2025-11-09,Nov,Orillia,38,18-39,F,5,Injury/Fracture,85,4.1,Discharged,680
+ED0256,2025-11-10,Nov,Midland,82,65+,F,4,Injury/Fracture,76,3.6,Discharged,505
+ED0257,2025-11-11,Nov,Midland,17,0-17,F,3,Abdominal pain,83,4.6,Discharged,929
+ED0258,2025-11-12,Nov,Barrie,47,40-64,M,2,Injury/Fracture,35,6.9,Discharged,919
+ED0259,2025-11-13,Nov,Midland,30,18-39,F,4,Abdominal pain,66,0.6,LWBS,80
+ED0260,2025-11-15,Nov,Barrie,43,40-64,F,3,Mental health,95,21.8,Admitted,6004
+ED0261,2025-11-16,Nov,Midland,33,18-39,F,3,Fever,40,4.3,Discharged,886
+ED0262,2025-11-17,Nov,Orillia,15,0-17,F,4,Headache,81,5.1,Discharged,714
+ED0263,2025-11-19,Nov,Barrie,39,18-39,F,3,Injury/Fracture,67,5.4,Discharged,775
+ED0264,2025-11-22,Nov,Midland,36,18-39,M,5,Fever,135,4.8,Discharged,703
+ED0265,2025-11-23,Nov,Barrie,1,0-17,M,3,Abdominal pain,132,6.6,Discharged,739
+ED0266,2025-11-25,Nov,Midland,38,18-39,M,3,Headache,79,5.8,Discharged,888
+ED0267,2025-11-25,Nov,Collingwood,31,18-39,F,3,Abdominal pain,77,5.8,Discharged,784
+ED0268,2025-11-26,Nov,Midland,45,40-64,F,2,Shortness of breath,14,15.3,Admitted,5207
+ED0269,2025-11-27,Nov,Barrie,62,40-64,F,4,Fever,171,4.9,Discharged,549
+ED0270,2025-11-27,Nov,Midland,46,40-64,F,4,Injury/Fracture,154,12.6,Admitted,2824
+ED0271,2025-11-30,Nov,Midland,69,65+,M,3,Mental health,53,4.5,Discharged,947
+ED0272,2025-12-01,Dec,Barrie,79,65+,F,4,Headache,131,3.7,Discharged,655
+ED0273,2025-12-02,Dec,Midland,23,18-39,M,3,Injury/Fracture,56,0.6,LWBS,68
+ED0274,2025-12-03,Dec,Barrie,22,18-39,M,3,Abdominal pain,119,6.9,Discharged,696
+ED0275,2025-12-05,Dec,Orillia,6,0-17,M,2,Shortness of breath,23,16.1,Admitted,3056
+ED0276,2025-12-05,Dec,Orillia,15,0-17,M,4,Headache,103,23.5,Admitted,6135
+ED0277,2025-12-07,Dec,Orillia,42,40-64,M,4,Fever,143,4.2,Discharged,582
+ED0278,2025-12-08,Dec,Barrie,40,40-64,F,5,Abdominal pain,119,4.3,Discharged,422
+ED0279,2025-12-09,Dec,Orillia,39,18-39,F,2,Abdominal pain,34,22.8,Admitted,5059
+ED0280,2025-12-09,Dec,Orillia,42,40-64,F,4,Injury/Fracture,96,5.9,Discharged,589
+ED0281,2025-12-09,Dec,Barrie,22,18-39,F,5,Laceration,143,1.2,LWBS,69
+ED0282,2025-12-10,Dec,Orillia,70,65+,M,3,Injury/Fracture,60,6.7,Discharged,724
+ED0283,2025-12-11,Dec,Barrie,68,65+,F,4,Abdominal pain,105,3.4,Discharged,669
+ED0284,2025-12-11,Dec,Orillia,38,18-39,M,4,Shortness of breath,64,3.7,Discharged,803
+ED0285,2025-12-12,Dec,Orillia,30,18-39,F,4,Fever,90,5.6,Discharged,706
+ED0286,2025-12-13,Dec,Collingwood,25,18-39,F,3,Abdominal pain,54,4.9,Discharged,933
+ED0287,2025-12-14,Dec,Orillia,34,18-39,M,3,Laceration,43,6.1,Discharged,744
+ED0288,2025-12-16,Dec,Barrie,69,65+,M,5,Injury/Fracture,165,9.4,Admitted,5408
+ED0289,2025-12-19,Dec,Orillia,42,40-64,M,3,Injury/Fracture,47,5.5,Discharged,740
+ED0290,2025-12-19,Dec,Barrie,85,65+,M,3,Abdominal pain,98,5.6,Discharged,755
+ED0291,2025-12-19,Dec,Barrie,61,40-64,F,4,Headache,183,2.0,LWBS,74
+ED0292,2025-12-20,Dec,Collingwood,16,0-17,M,3,Fever,39,6.6,Discharged,933
+ED0293,2025-12-21,Dec,Orillia,23,18-39,M,3,Fever,73,8.3,Transferred,2278
+ED0294,2025-12-22,Dec,Barrie,18,18-39,M,5,Headache,155,3.6,Discharged,625
+ED0295,2025-12-23,Dec,Collingwood,34,18-39,F,5,Chest pain,133,3.3,Discharged,453
+ED0296,2025-12-23,Dec,Barrie,5,0-17,M,2,Headache,30,12.9,Admitted,2845
+ED0297,2025-12-24,Dec,Collingwood,78,65+,M,3,Shortness of breath,68,4.3,Discharged,817
+ED0298,2025-12-24,Dec,Midland,87,65+,F,3,Fever,96,2.4,LWBS,79
+ED0299,2025-12-24,Dec,Barrie,68,65+,F,4,Mental health,106,3.9,Discharged,798
+ED0300,2025-12-28,Dec,Barrie,78,65+,M,4,Injury/Fracture,149,6.0,Discharged,690
