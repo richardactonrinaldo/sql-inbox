@@ -19,6 +19,7 @@ import anthropic
 import pandas as pd
 import streamlit as st
 
+SQL_APP = True
 DB_PATH = Path(__file__).parent / "data" / "lakeshore_ed.db"
 MAX_STUDENT_MESSAGES = 60     # per session; caps cost if someone leaves a script running
 MAX_RESULT_ROWS = 1000        # rows a student's query can return in the workspace
@@ -162,7 +163,26 @@ TOOLS = [{
                    "and compare. Returns columns, row_count and up to 50 rows.",
     "input_schema": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]},
 }]
-TOOL_FUNCS = {"run_sql": run_sql_tool}
+
+OPEN_REQUEST_TOOL = {
+    "name": "open_request",
+    "description": "Call this every time you send a NEW request (including the first). It shows the analyst a "
+                   "prediction box with your prediction question, and the app won't let them send results for "
+                   "this request until they've answered it.",
+    "input_schema": {"type": "object", "properties": {
+        "title": {"type": "string", "description": "Short name for the request, e.g. 'Barrie top 10 waits'"},
+        "prediction_question": {"type": "string", "description": "The question they answer before starting"}},
+        "required": ["title", "prediction_question"]},
+}
+
+
+def open_request(title: str, prediction_question: str) -> dict:
+    st.session_state.request = {"title": title, "question": prediction_question, "prediction": None}
+    return {"ok": True, "note": "The analyst now sees your prediction question in a box and must answer it "
+                                "before they can send results for this request."}
+
+TOOLS.append(OPEN_REQUEST_TOOL)
+TOOL_FUNCS = {"run_sql": run_sql_tool, "open_request": open_request}
 
 # ---------------------------------------------------------------- persona
 TOPICS = {
@@ -204,7 +224,7 @@ This module's focus: {TOPICS[topic]}
 How you work:
 - Write like a busy, supportive manager in a work chat: short, plain, friendly. Under 150 words per reply, except a new request may run to 200. No headings. Short bullet lists are fine. Put any SQL in a code block.
 - Each request gives: why you need it (business context), the specific question(s), who it's for, and when (e.g. "by end of day"). Ask for at most 3 things per request. Your first message greets them briefly and sends the first request; point them to the table list in the sidebar.
-- End every new request with one prediction question to answer BEFORE they write any SQL, e.g. "Before you run anything: how many rows do you expect back, roughly? Why?" or "Which site do you expect at the top?" When they answer, don't say whether they're right; just acknowledge it ("Noted, let's see what the data says"). When their results come in, compare them with the prediction and ask what surprised them, if anything.
+- Every new request (including the first) ends with one prediction question to answer BEFORE they start, e.g. "Before you run anything: how many rows do you expect back, roughly? Why?" Also call open_request with a short title and that question: the app shows them a prediction box and won't accept their results for the request until they've answered it. Their answer arrives as a message starting with "[Prediction]". Don't say whether it's right; just acknowledge it ("Noted, let's see what the data says") and let them get to work. When their results come in, compare them with the prediction and ask what surprised them, if anything.
 - Stay within this module's SQL skills and a beginner's level. "A little harder" means a new question, an extra condition or a judgement call using the same skills, never new techniques. Never use or suggest subqueries, CTEs (WITH), window functions, views or anything from a later module. The course doesn't teach subqueries.
 - If you write your message and then call a tool, don't repeat that message after the tool result. Add only what's new, or nothing.
 - One thing at a time. Don't stack a new request on top of an unfinished one. When you ask a follow-up question, wait for the answer, respond to it, and only then send the next request.
@@ -360,7 +380,7 @@ def write_checkin() -> str:
 # the last digits of the student number, so a returning student only types those. A random link token
 # in the page address also restores the conversation on a plain reload. Saved conversations are lost
 # only when the app itself restarts (after a long idle sleep or a new deploy).
-SAVED_KEYS = ["student", "student_number", "topic", "api_messages", "chat", "tokens", "wrap_stage"]
+SAVED_KEYS = ["student", "student_number", "topic", "api_messages", "chat", "tokens", "wrap_stage", "request"]
 KEEP_DAYS = 14
 
 
@@ -410,6 +430,7 @@ def restore_conversation(number: str) -> bool:
 
 def reset(topic=None):
     st.session_state.wrap_stage = 0
+    st.session_state.request = None
     st.session_state.api_messages = []
     st.session_state.chat = []  # dicts: who, text, and for submissions: sql, result, error
     st.session_state.tokens = {"in": 0, "out": 0}
@@ -501,6 +522,35 @@ with st.sidebar:
     st.caption(f"Signed in as {st.session_state.student} (…{st.session_state.student_number}). If the page "
                "reloads or you come back later, enter these digits to continue.")
 
+def prediction_pending() -> bool:
+    req = st.session_state.get("request")
+    return bool(req) and not req.get("prediction")
+
+
+def queue_prediction():
+    text = st.session_state.get("prediction_box", "").strip()
+    if len(text) < 10:
+        st.session_state.prediction_warning = True
+        return
+    st.session_state.request["prediction"] = text
+    st.session_state.pending_prediction = text
+    st.session_state.prediction_box = ""
+
+
+def prediction_box():
+    req = st.session_state.request
+    with st.container(border=True):
+        st.markdown(f"**Before you start:** {req['question']}")
+        st.text_area("Your prediction, and why", key="prediction_box", height=90,
+                     placeholder="I expect ... because ...")
+        if st.session_state.pop("prediction_warning", False):
+            st.warning("Write a sentence or two: what you expect, and why.")
+        st.button("Save my prediction", type="primary", on_click=queue_prediction)
+        st.caption("You can still ask Dana questions in the chat. "
+                   + ("Sending query results unlocks once you've saved your prediction."
+                      if SQL_APP else "Attaching your workbook unlocks once you've saved your prediction."))
+
+
 # ---------------------------------------------------------------- layout: chat | SQL workspace
 st.markdown("#### Dana Morgan")
 st.caption("Manager, Decision Support · Lakeshore Regional Health")
@@ -547,7 +597,9 @@ with sql_col:
             st.caption("You've changed the query since it last ran. Run it again before sending it.")
         st.text_input("Note for Dana (optional)", key="sql_note",
                       placeholder="e.g. Here's my query for your request")
-        st.button("Send query and results to Dana", on_click=queue_submission, disabled=stale,
+        if prediction_pending():
+            st.caption("Answer Dana's prediction question in the chat panel before sending results.")
+        st.button("Send query and results to Dana", on_click=queue_submission, disabled=stale or prediction_pending(),
                   help="Dana sees your exact query and its results.")
     else:
         st.caption("Write a query and click Run query. When the result looks right, send it to Dana. "
@@ -600,11 +652,14 @@ with chat_col:
         st.warning("You've reached the message limit for this session. Download your transcript, then press Start over.")
         st.stop()
 
+    if prediction_pending():
+        prediction_box()
     prompt = st.chat_input("Reply to Dana. Send query results from the SQL workspace.")
 
 submission = st.session_state.pop("pending_submission", None)
 wrap_up = st.session_state.pop("wrap_up", False)
-if prompt or submission or wrap_up:
+prediction = st.session_state.pop("pending_prediction", None)
+if prompt or submission or wrap_up or prediction:
     if submission:
         entry = {"who": "You", "text": submission["note"], "sql": submission["sql"],
                  "result": submission["result"], "error": submission["error"]}
@@ -612,8 +667,12 @@ if prompt or submission or wrap_up:
                     + (f"Note: {submission['note']}\n" if submission["note"] else "")
                     + result_text(submission["sql"], submission["result"], submission["error"], ROWS_SENT_TO_DANA))
     else:
-        text = prompt.strip() if prompt else "I need to stop for today."
-        entry, api_text = {"who": "You", "text": text}, (f"[Clicked Finish for today] {text}" if wrap_up else text)
+        if prediction:
+            text = f"My prediction: {prediction}"
+            entry, api_text = {"who": "You", "text": text}, f"[Prediction] {prediction}"
+        else:
+            text = prompt.strip() if prompt else "I need to stop for today."
+            entry, api_text = {"who": "You", "text": text}, (f"[Clicked Finish for today] {text}" if wrap_up else text)
     st.session_state.chat.append(entry)
     answering_reflection = st.session_state.get("wrap_stage", 0) == 1 and not wrap_up
     before = len(st.session_state.api_messages)
