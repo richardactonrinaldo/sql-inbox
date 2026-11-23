@@ -781,12 +781,13 @@ with chat_col:
                      f"(Details for your instructor: {api_error_detail(e)})")
             st.stop()
 
-    if st.session_state.chat and st.session_state.chat[-1].get("checkin"):
+    if st.session_state.get("end_reminder") and st.session_state.chat and st.session_state.chat[-1].get("checkin"):
         st.success("**Before you go, download your transcript.** It's your record of today's work. "
                    "If your conversation is gone next time, upload it when you sign in and Dana will pick up "
                    "where you left off.")
         st.download_button("Download transcript", transcript, transcript_name, type="primary",
-                           key="end_of_session_transcript")
+                           key="end_of_session_transcript",
+                       on_click=lambda: st.session_state.update(end_reminder=False))
 
     if st.session_state.pop("checkin_failed", False):
         st.warning("Dana couldn't write your end-of-day check-in just now. Click Finish for today to try again.")
@@ -843,6 +844,7 @@ if prompt or submission or wrap_up or prediction:
             with chat_col, st.spinner("Dana is writing your end-of-day check-in…"):
                 note = write_checkin()
             st.session_state.chat.append({"who": "Dana", "text": note, "checkin": True})
+            st.session_state.end_reminder = True
         except anthropic.APIError:
             st.session_state.checkin_failed = True
     save_conversation()
