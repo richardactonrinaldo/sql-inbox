@@ -13,6 +13,7 @@ import secrets
 import sqlite3
 import time
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
@@ -467,7 +468,39 @@ def clean_number(raw: str) -> str:
     return re.sub(r"\s+", "", raw or "")
 
 
+LOCAL_TZ = ZoneInfo("America/Toronto")
+
+
+def local_now() -> datetime:
+    return datetime.now(LOCAL_TZ)
+
+
+def transcript_header() -> str:
+    """Name, module and session times for the top of the transcript."""
+    times = [datetime.fromisoformat(m["at"]) for m in st.session_state.chat if m.get("at")]
+    lines = [f"Student: {st.session_state.student} (student number ending {st.session_state.student_number})",
+             f"Module: {st.session_state.topic}"]
+    if times:
+        start, end = min(times), max(times)
+        mins = int((end - start).total_seconds() // 60)
+        lines += [f"Session started: {start:%a %Y-%m-%d %H:%M} (Eastern time)",
+                  f"Last message: {end:%a %Y-%m-%d %H:%M} ({mins // 60} h {mins % 60} min after the start)"]
+    lines.append(f"Transcript downloaded: {local_now():%a %Y-%m-%d %H:%M}")
+    return "\n".join(lines) + "\n\n"
+
+
+def stamp(m: dict) -> str:
+    """[09:21] before each message, with the date added if the session ran past midnight."""
+    if not m.get("at"):
+        return ""
+    t = datetime.fromisoformat(m["at"])
+    first = next((datetime.fromisoformat(x["at"]) for x in st.session_state.chat if x.get("at")), t)
+    return f"[{t:%H:%M}] " if t.date() == first.date() else f"[{t:%a %b %d %H:%M}] "
+
+
 def save_conversation():
+    for m in st.session_state.get("chat") or []:
+        m.setdefault("at", local_now().isoformat())
     number = st.session_state.get("student_number")
     if not number:
         return
@@ -592,9 +625,8 @@ with st.sidebar:
                 st.dataframe(pd.DataFrame(full["rows"], columns=full["columns"]), hide_index=True, width="stretch")
 
     st.subheader("Conversation")
-    transcript = (f"Student: {st.session_state.student} (student number ending {st.session_state.student_number})\n"
-                  f"Module: {st.session_state.topic}\n\n"
-                  + "\n\n".join(f"{'Dana Morgan' if m['who'] == 'Dana' else st.session_state.student}: "
+    transcript = (transcript_header()
+                  + "\n\n".join(f"{stamp(m)}{'Dana Morgan' if m['who'] == 'Dana' else st.session_state.student}: "
                                 f"{message_text(m, rows=20)}" for m in st.session_state.chat))
     transcript_name = f"transcript_SQL_{st.session_state.student}_{st.session_state.student_number}_{datetime.now():%Y%m%d}.txt"
     st.download_button("Download transcript", transcript, transcript_name, width="stretch")
@@ -776,7 +808,7 @@ wrap_up = st.session_state.pop("wrap_up", False)
 prediction = st.session_state.pop("pending_prediction", None)
 if prompt or submission or wrap_up or prediction:
     if submission:
-        entry = {"who": "You", "text": submission["note"], "sql": submission["sql"],
+        entry = {"who": "You", "at": local_now().isoformat(), "text": submission["note"], "sql": submission["sql"],
                  "result": submission["result"], "error": submission["error"]}
         api_text = ("[Submitted from the SQL workspace]\n"
                     + (f"Note: {submission['note']}\n" if submission["note"] else "")
@@ -788,6 +820,7 @@ if prompt or submission or wrap_up or prediction:
         else:
             text = prompt.strip() if prompt else "I need to stop for today."
             entry, api_text = {"who": "You", "text": text}, (f"[Clicked Finish for today] {text}" if wrap_up else text)
+    entry.setdefault("at", local_now().isoformat())
     st.session_state.chat.append(entry)
     answering_reflection = st.session_state.get("wrap_stage", 0) == 1 and not wrap_up
     before = len(st.session_state.api_messages)
