@@ -153,7 +153,7 @@ def to_html(text: str, title: str) -> str:
     while i < len(lines) and lines[i].strip():
         header.append(lines[i])
         i += 1
-    m = re.match(r"Student:\s*(.+?)\s*\(", header[0]) if header else None
+    m = re.match(r"Student:\s*(.+?)\s*(?:\(student number ending.*\))?\s*$", header[0]) if header else None
     student = m.group(1) if m else "Student"
     start = re.compile(r"^(?:\[(?P<ts>[^\]]+)\] )?(?P<who>Dana Morgan|" + re.escape(student) + r"): ?(?P<rest>.*)$")
     msgs, cur = [], None

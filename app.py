@@ -282,7 +282,7 @@ TOPICS = {
 
 
 def system_prompt(topic: str, student: str) -> str:
-    return f"""You are Dana Morgan, Manager of Decision Support at Lakeshore Regional Health, a fictional hospital network in Central Ontario. You are chatting with {student}, a junior healthcare data analyst on your team. In reality they are a college student in a health informatics course, a beginner with SQL. Stay in character the whole time.
+    return f"""You are Dana Morgan, Manager of Decision Support at Lakeshore Regional Health, a fictional hospital network in Central Ontario. You are chatting with {student} (a nickname the analyst chose; use it as their name), a junior healthcare data analyst on your team. In reality they are a college student in a health informatics course, a beginner with SQL. Stay in character the whole time.
 
 {SCHEMA}
 
@@ -451,7 +451,7 @@ def write_checkin() -> str:
 
 # ---------------------------------------------------------------- keep conversations across reconnects
 # Streamlit forgets a browser's session when it disconnects. Conversations are kept on the server under
-# the last digits of the student number, so a returning student only types those. A random link token
+# the student's nickname, so a returning student only types that. A random link token
 # in the page address also restores the conversation on a plain reload. Saved conversations are lost
 # only when the app itself restarts (after a long idle sleep or a new deploy).
 SAVED_KEYS = ["student", "student_number", "topic", "api_messages", "chat", "tokens", "wrap_stage", "request"]
@@ -468,8 +468,9 @@ def norm_code(raw: str) -> str:
     return re.sub(r"[\s\-_]+", "", raw or "").lower()
 
 
-def clean_number(raw: str) -> str:
-    return re.sub(r"\s+", "", raw or "")
+def nickname_key(nick: str) -> str:
+    """How a nickname is matched: case, spaces and punctuation don't matter (Quiet Otter 37 = quietotter37)."""
+    return re.sub(r"[^a-z0-9]", "", (nick or "").lower())
 
 
 LOCAL_TZ = ZoneInfo("America/Toronto")
@@ -482,7 +483,7 @@ def local_now() -> datetime:
 def transcript_header() -> str:
     """Name, module and session times for the top of the transcript."""
     times = [datetime.fromisoformat(m["at"]) for m in st.session_state.chat if m.get("at")]
-    lines = [f"Student: {st.session_state.student} (student number ending {st.session_state.student_number})",
+    lines = [f"Student: {st.session_state.student}",
              f"Module: {st.session_state.topic}"]
     if times:
         start, end = min(times), max(times)
@@ -571,37 +572,33 @@ if "student" not in st.session_state:
     st.write("Dana Morgan, Manager of Decision Support at Lakeshore Regional Health, will send you "
              "analysis requests. Write and run SQL queries in the app and send her your results.")
     with st.form("signin"):
-        number = st.text_input("Last 4 digits of your student number", max_chars=5)
-        st.caption("Coming back to a conversation? These four digits are all you need.")
-        name = st.text_input("First name (first visit only)")
+        nick = st.text_input("Your nickname", max_chars=24, placeholder="e.g. QuietOtter37")
+        st.caption("Pick a nickname only you would use (a word plus a couple of numbers works well). It doesn't "
+                   "need to be your real name. Dana calls you by it, and it's all you need to come back to your "
+                   "conversation, so write it down.")
         code = st.text_input("Class code (first visit only)", type="password")
         resume_file = st.file_uploader("Continuing from an earlier session? Upload the transcript you "
                                        "downloaded last time (optional).", type=["html", "htm", "txt"])
         if st.form_submit_button("Open my inbox", type="primary"):
-            number = clean_number(number)
-            saved = conversation_store()["by_number"].get(number)
-            other_name = saved and name.strip() and saved["student"].lower() != name.strip().lower()
-            if not re.fullmatch(r"\d{4,5}", number):
-                st.error("Enter the last 4 digits of your student number.")
-            elif saved and not other_name:
-                restore_conversation(number)
-                link_session(number)
+            display = re.sub(r"\s+", " ", nick or "").strip()
+            key = nickname_key(display)
+            saved = conversation_store()["by_number"].get(key)
+            if not re.fullmatch(r"[A-Za-z0-9 _.\-]{3,24}", display) or len(key) < 3:
+                st.error("Choose a nickname of 3 to 24 letters or numbers (spaces, - and _ are fine).")
+            elif saved:
+                restore_conversation(key)
+                link_session(key)
                 st.rerun()
             elif not st.secrets.get("CLASS_CODE") or norm_code(code) != norm_code(str(st.secrets["CLASS_CODE"])):
-                st.error("No saved conversation was found for those digits, so this is a new start. "
-                         "Enter your first name and the class code your instructor posted on Blackboard.")
-            elif not name.strip():
-                st.error("Enter your first name so Dana knows who she's talking to.")
-            elif other_name:
-                st.error("Another student in this class has the same last four digits. Use the last "
-                         "5 digits of your student number instead, here and every time you come back.")
+                st.error("No saved conversation was found for that nickname, so this is a new start. "
+                         "Enter the class code your instructor posted on Blackboard.")
             else:
-                st.session_state.student = " ".join(w[:1].upper() + w[1:] for w in name.split())
-                st.session_state.student_number = number
+                st.session_state.student = display
+                st.session_state.student_number = key
                 reset(next(iter(TOPICS)))
                 if resume_file:
                     start_resume(resume_file.getvalue(), resume_file.name)
-                link_session(number)
+                link_session(key)
                 st.rerun()
     st.stop()
 
@@ -632,7 +629,7 @@ with st.sidebar:
     transcript = (transcript_header()
                   + "\n\n".join(f"{stamp(m)}{'Dana Morgan' if m['who'] == 'Dana' else st.session_state.student}: "
                                 f"{message_text(m, rows=20)}" for m in st.session_state.chat))
-    transcript_name = f"transcript_SQL_{st.session_state.student}_{st.session_state.student_number}_{datetime.now():%Y%m%d}.html"
+    transcript_name = f"transcript_SQL_{st.session_state.student_number}_{datetime.now():%Y%m%d}.html"
     transcript_page = transcript_to_html(
         transcript, f"Analyst Inbox transcript: {st.session_state.student}, {local_now():%d %b %Y}")
     st.download_button("Download transcript", transcript_page, transcript_name, "text/html", width="stretch")
@@ -652,8 +649,8 @@ with st.sidebar:
         st.rerun()
     st.caption("Click Finish for today and answer Dana's last question, then download your transcript "
                "and submit it on Blackboard.")
-    st.caption(f"Signed in as {st.session_state.student} (…{st.session_state.student_number}). If the page "
-               "reloads or you come back later, enter these digits to continue.")
+    st.caption(f"Signed in as {st.session_state.student}. If the page reloads or you come back later, "
+               "enter this nickname to continue.")
 
 def prediction_pending() -> bool:
     req = st.session_state.get("request")
